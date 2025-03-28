@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Doodle Jump Game</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      /* Фон всей игры с использованием изображения */
+      background: url('images/background.png') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; /* Центрирование по вертикали */
+    }
+    /* Контейнер игрового окна */
+    #gameContainer {
+      position: relative;
+    }
+    canvas {
+      border: 2px solid #333;
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      display: block;
+    }
+    /* Табло: текущий счет и максимальный счет */
+    #scoreContainer {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      z-index: 2;
+    }
+    .scoreBoard {
+      font-size: 20px;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      color: #333;
+    }
+    /* Меню проигрыша */
+    #gameOver {
+      position: absolute;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      width: 600px;
+      height: 667px;
+      text-align: center;
+      top: 0;
+      left: 0;
+      z-index: 3;
+    }
+    #gameOver img {
+      max-width: 80%;
+      margin-bottom: 10px;
+    }
+    #restartButton {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #restartButton:hover {
+      background-color: #45a049;
+    }
+    /* Меню паузы */
+    #pauseMenu {
+      position: absolute;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(119, 248, 59, 0.7);
+      width: 600px;
+      height: 667px;
+      top: 0;
+      left: 0;
+      z-index: 3;
+    }
+    #pauseMenu img {
+      max-width: 80%;
+      margin-bottom: 10px;
+    }
+    /* Мобильные кнопки - вынесены под игровым полем */
+    #mobileControls {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+      z-index: 2;
+    }
+    #mobileControls button {
+      width: 60px;
+      height: 60px;
+      border: none;
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    #mobileControls button:active {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+  </style>
+</head>
+<body>
+  <div id="gameContainer">
+    <canvas width="600" height="667" id="game"></canvas>
+    <div id="scoreContainer">
+      <div id="score" class="scoreBoard">score: 0</div>
+      <div id="maxScore" class="scoreBoard">max score: 0</div>
+    </div>
+    <!-- Меню проигрыша -->
+    <div id="gameOver">
+      <img src="images/gameover.png" alt="Game Over">
+      <h1>Game Over!</h1>
+      <p id="finalScore">score: 0</p>
+      <button id="restartButton">Play Again</button>
+      <p>or press Enter</p>
+    </div>
+    <!-- Меню паузы -->
+    <div id="pauseMenu">
+      <img src="images/pause.png" alt="Paused">
+      <h1>Paused</h1>
+      <p>Press ESC to resume</p>
+    </div>
+  </div>
+  <div id="mobileControls">
+    <button id="leftButton">
+      <!-- svg-иконка левой стрелки -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" viewBox="0 0 24 24">
+        <path d="M14 7l-5 5 5 5V7z"/>
+      </svg>
+    </button>
+    <button id="rightButton">
+      <!-- svg-иконка правой стрелки -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" viewBox="0 0 24 24">
+        <path d="M10 17l5-5-5-5v10z"/>
+      </svg>
+    </button>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
